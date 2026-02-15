@@ -71,6 +71,27 @@ function showApp() {
   document.getElementById('app-wrapper').style.display = 'block';
 }
 
+// ─── SIDEBAR (Mobile Hamburger Menu) ──────────────────
+function openSidebar() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebar-overlay').classList.add('show');
+  document.getElementById('hamburger-btn').classList.add('open');
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('show');
+  document.getElementById('hamburger-btn').classList.remove('open');
+}
+
+document.getElementById('hamburger-btn').addEventListener('click', () => {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+});
+
+document.getElementById('sidebar-close').addEventListener('click', closeSidebar);
+document.getElementById('sidebar-overlay').addEventListener('click', closeSidebar);
+
 // Google Sign-In
 document.getElementById('google-signin-btn').addEventListener('click', async () => {
   if (!isFirebaseConfigured()) {
@@ -96,6 +117,8 @@ document.getElementById('offline-btn').addEventListener('click', () => {
   localStorage.setItem('dailydrive_mode', 'offline');
   appData = loadLocalData();
   document.getElementById('user-menu').style.display = 'none';
+  const mobileMenuOff = document.getElementById('user-menu-mobile');
+  if (mobileMenuOff) mobileMenuOff.style.display = 'none';
   showApp();
   initApp();
 });
@@ -123,11 +146,19 @@ if (isFirebaseConfigured()) {
       isOnlineMode = true;
       localStorage.setItem('dailydrive_mode', 'online');
 
-      // Show user info
+      // Show user info (desktop + mobile sidebar)
       document.getElementById('user-menu').style.display = 'flex';
       const avatar = document.getElementById('user-avatar');
       avatar.src = user.photoURL || '';
       avatar.alt = user.displayName || 'User';
+
+      // Sync mobile sidebar user info
+      const mobileMenu = document.getElementById('user-menu-mobile');
+      if (mobileMenu) mobileMenu.style.display = 'flex';
+      const mobileAvatar = document.getElementById('user-avatar-mobile');
+      if (mobileAvatar) { mobileAvatar.src = user.photoURL || ''; mobileAvatar.alt = user.displayName || 'User'; }
+      const mobileName = document.getElementById('user-name-mobile');
+      if (mobileName) mobileName.textContent = user.displayName || 'User';
 
       // Load data from Firestore (merge with local if needed)
       await loadCloudData();
@@ -145,6 +176,8 @@ if (isFirebaseConfigured()) {
         currentUser = null;
         appData = loadLocalData();
         document.getElementById('user-menu').style.display = 'none';
+        const mobileMenuOffline = document.getElementById('user-menu-mobile');
+        if (mobileMenuOffline) mobileMenuOffline.style.display = 'none';
         showApp();
         initApp();
       } else {
@@ -387,6 +420,8 @@ function updateStreak() {
   }
 
   document.getElementById('streak-count').textContent = streak;
+  const mobileStreak = document.getElementById('streak-count-mobile');
+  if (mobileStreak) mobileStreak.textContent = streak;
 }
 
 // ─── CALENDAR ──────────────────────────────────────────
@@ -560,6 +595,32 @@ function checkTodaysProgress() {
 }
 
 document.getElementById('check-today-btn').addEventListener('click', checkTodaysProgress);
+
+// Mobile sidebar check-today button
+const checkTodayMobile = document.getElementById('check-today-btn-mobile');
+if (checkTodayMobile) {
+  checkTodayMobile.addEventListener('click', () => {
+    closeSidebar();
+    checkTodaysProgress();
+  });
+}
+
+// Mobile sidebar sign-out button
+const signoutMobile = document.getElementById('signout-btn-mobile');
+if (signoutMobile) {
+  signoutMobile.addEventListener('click', async () => {
+    closeSidebar();
+    if (firestoreUnsubscribe) {
+      firestoreUnsubscribe();
+      firestoreUnsubscribe = null;
+    }
+    localStorage.removeItem('dailydrive_mode');
+    if (auth) await auth.signOut();
+    currentUser = null;
+    isOnlineMode = false;
+    showAuthScreen();
+  });
+}
 
 // ─── ANALYTICS ─────────────────────────────────────────
 let chartDaily = null;

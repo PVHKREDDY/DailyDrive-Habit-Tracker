@@ -55,27 +55,53 @@
 
     <!-- Header -->
     <header class="header">
-      <div class="header-top">
-        <div class="logo">
-          <img src="logo.svg" alt="DailyDrive" class="logo-img" width="28" height="28" />
-          <h1>DailyDrive</h1>
-        </div>
-        <div class="header-actions">
-          <div class="streak-badge" id="streak-badge">
-            <span class="streak-icon">🔥</span>
-            <span id="streak-count">0</span> day streak
-          </div>
-          <div class="user-menu" id="user-menu" style="display:none;">
-            <img class="user-avatar" id="user-avatar" src="" alt="" />
-            <button class="btn btn-ghost btn-sm" id="signout-btn">Sign Out</button>
-          </div>
-        </div>
+      <div class="logo">
+        <img src="logo.svg" alt="DailyDrive" class="logo-img" width="28" height="28" />
+        <h1>DailyDrive</h1>
       </div>
-      <div class="header-bottom">
-        <span class="subtitle" id="header-subtitle">Monthly Habit Tracker</span>
+      <span class="subtitle" id="header-subtitle">Monthly Habit Tracker</span>
+      <!-- Desktop actions (hidden on mobile) -->
+      <div class="desktop-actions">
+        <div class="streak-badge" id="streak-badge">
+          <span class="streak-icon">🔥</span>
+          <span id="streak-count">0</span> day streak
+        </div>
         <button class="btn btn-primary" id="check-today-btn">Check Progress</button>
+        <div class="user-menu" id="user-menu" style="display:none;">
+          <img class="user-avatar" id="user-avatar" src="" alt="" />
+          <button class="btn btn-ghost btn-sm" id="signout-btn">Sign Out</button>
+        </div>
       </div>
+      <!-- Hamburger (visible on mobile only) -->
+      <button class="hamburger" id="hamburger-btn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </header>
+
+    <!-- Mobile Sidebar -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <img src="logo.svg" alt="DailyDrive" width="24" height="24" />
+          <h2>DailyDrive</h2>
+        </div>
+        <button class="sidebar-close" id="sidebar-close">&times;</button>
+      </div>
+      <div class="sidebar-body">
+        <div class="sidebar-streak">
+          <span class="streak-icon">🔥</span>
+          <span id="streak-count-mobile">0</span> day streak
+        </div>
+        <button class="btn btn-primary sidebar-btn" id="check-today-btn-mobile">Check Today's Progress</button>
+        <div class="sidebar-user" id="user-menu-mobile" style="display:none;">
+          <img class="user-avatar" id="user-avatar-mobile" src="" alt="" />
+          <span id="user-name-mobile" class="sidebar-username"></span>
+        </div>
+        <hr class="sidebar-divider" />
+        <button class="btn btn-ghost sidebar-btn" id="signout-btn-mobile">Sign Out</button>
+      </div>
+    </aside>
 
     <!-- Navigation Tabs -->
     <nav class="tabs">
