@@ -83,6 +83,20 @@ body {
   gap: 10px;
 }
 
+.logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  animation: pulse 2s infinite;
+}
+
+.logo-img-lg {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  animation: pulse 2s infinite;
+}
+
 .logo-icon {
   font-size: 28px;
   animation: pulse 2s infinite;
@@ -90,7 +104,7 @@ body {
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+  50% { transform: scale(1.08); }
 }
 
 .logo h1 {
@@ -945,6 +959,12 @@ body {
   justify-content: center;
   gap: 12px;
   margin-bottom: 8px;
+}
+
+.auth-logo .logo-img-lg {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
 }
 
 .auth-logo .logo-icon {
