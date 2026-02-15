@@ -135,7 +135,7 @@ if (isFirebaseConfigured()) {
       initApp();
       listenForCloudChanges();
 
-      showSyncBanner('Synced with cloud ✓', 'success');
+      // Sync complete (silent)
     } else {
       // Not signed in — check if they were in offline mode
       const savedMode = localStorage.getItem('dailydrive_mode');
@@ -262,7 +262,7 @@ function listenForCloudChanges() {
         saveLocal(appData);
         renderToday();
         renderCalendar();
-        showSyncBanner('Synced from another device ✓', 'success');
+        // Silently synced from another device
       }
     }, (err) => {
       console.warn('Snapshot listener error:', err);
