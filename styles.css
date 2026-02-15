@@ -57,36 +57,35 @@ body {
 /* ============ HEADER ============ */
 .header {
   display: flex;
-  flex-direction: column;
-  padding: 14px 24px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 16px 32px;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
   backdrop-filter: blur(20px);
-  gap: 10px;
+  gap: 12px;
 }
 
 .header-top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
+  gap: 20px;
+  flex: 1;
 }
 
 .header-bottom {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
   gap: 12px;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .logo {
@@ -887,9 +886,17 @@ body {
 @media (max-width: 768px) {
   .header {
     padding: 10px 14px;
-    gap: 6px;
+    gap: 8px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .header-top {
+    justify-content: space-between;
+    width: 100%;
   }
   .header-bottom {
+    justify-content: space-between;
+    width: 100%;
     gap: 8px;
   }
   .logo h1 {
