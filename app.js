@@ -398,6 +398,18 @@ function updateTodayRing() {
   document.getElementById('today-percent').textContent = `${percent}%`;
 }
 
+const ALL_DONE_MESSAGES = [
+  "Crushed it! Do it again tomorrow. 💪",
+  "All done! Prove it again tomorrow. 🔥",
+  "100%! Same energy tomorrow. 🎯",
+  "Perfect day. Now make it a streak! ⚡",
+  "Every habit — DONE. Legend. 🏆",
+  "You showed up and showed out! 🚀",
+  "All checked! Tomorrow's turn next. 💎",
+  "Discipline on display. Keep going! 🏅",
+  "Owned today. Sleep well, go again! 🌟",
+];
+
 async function toggleHabit(dayKeyStr, habitId) {
   if (!appData.days[dayKeyStr]) {
     appData.days[dayKeyStr] = {};
@@ -406,6 +418,18 @@ async function toggleHabit(dayKeyStr, habitId) {
   await saveData();
   renderToday();
   renderCalendar();
+
+  // Check if all habits are now done for today
+  const todayKey = dayKey(getTodayDay());
+  if (dayKeyStr === todayKey) {
+    const dayData = appData.days[todayKey] || {};
+    const total = appData.habits.length;
+    const done = appData.habits.filter(h => dayData[h.id]).length;
+    if (done === total && total > 0) {
+      const msg = ALL_DONE_MESSAGES[Math.floor(Math.random() * ALL_DONE_MESSAGES.length)];
+      showToast('success', 'All Habits Complete!', msg, 5000);
+    }
+  }
 }
 
 // ─── STREAK ────────────────────────────────────────────
@@ -584,10 +608,8 @@ function checkTodaysProgress() {
   const incomplete = appData.habits.filter(h => !dayData[h.id]);
 
   if (done === total && total > 0) {
-    showToast('success', 'PERFECT DAY! 🏆',
-      'You absolute LEGEND! Every single habit completed! Keep this energy going — you\'re unstoppable!',
-      10000
-    );
+    const msg = ALL_DONE_MESSAGES[Math.floor(Math.random() * ALL_DONE_MESSAGES.length)];
+    showToast('success', 'All Habits Complete!', msg, 5000);
   } else if (incomplete.length > 0) {
     incomplete.forEach((habit, i) => {
       setTimeout(() => {
