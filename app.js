@@ -922,7 +922,7 @@ function initApp() {
   document.getElementById('header-subtitle').textContent = subtitleText;
   document.getElementById('auth-subtitle').textContent = subtitleText;
   document.getElementById('calendar-title').textContent = `${MONTH_NAME} ${YEAR} — Daily Overview`;
-  document.title = `DailyDrive — ${MONTH_NAME} ${YEAR} Habit Tracker`;
+  document.title = 'DailyDrive — Habit Tracker';
 
   // Ensure all habits have entries for all days
   for (let d = 1; d <= DAYS_IN_MONTH; d++) {
