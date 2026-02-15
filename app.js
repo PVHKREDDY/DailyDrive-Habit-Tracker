@@ -425,6 +425,7 @@ async function toggleHabit(dayKeyStr, habitId) {
   saveData();
   renderToday();
   renderCalendar();
+  updateStreak();
 
   // If this is today's key AND the habit was just checked (not unchecked), see if all done
   if (appData.days[dayKeyStr][habitId]) {
