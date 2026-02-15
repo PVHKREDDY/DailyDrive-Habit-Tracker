@@ -6,7 +6,26 @@
 // ─── FORCE SERVICE WORKER UPDATE ──────────────────────
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistration().then(reg => {
-    if (reg) reg.update();
+    if (reg) {
+      reg.update();
+      // Force waiting worker to activate immediately
+      if (reg.waiting) {
+        reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+        window.location.reload();
+      }
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        newWorker.addEventListener('statechange', () => {
+          if (newWorker.state === 'activated') {
+            window.location.reload();
+          }
+        });
+      });
+    }
+  });
+  // Also listen for controller change
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    window.location.reload();
   });
 }
 

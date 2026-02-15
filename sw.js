@@ -3,7 +3,7 @@
    Enables offline support & PWA install
    ============================================ */
 
-const CACHE_NAME = 'dailydrive-v16';
+const CACHE_NAME = 'dailydrive-v17';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -19,6 +19,13 @@ const EXTERNAL_CACHE = [
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap',
   'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js',
 ];
+
+// Listen for skip waiting message from app
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
 
 // Install — cache core assets
 self.addEventListener('install', (event) => {
