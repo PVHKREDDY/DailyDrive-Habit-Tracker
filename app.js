@@ -469,13 +469,6 @@ function updateStreak() {
     const total = appData.habits.length;
     const done = appData.habits.filter(h => dayData[h.id] === true).length;
 
-    // Debug: log today's check
-    if (d === today) {
-      console.log('[Streak Debug] key:', key, 'total:', total, 'done:', done);
-      console.log('[Streak Debug] habits:', appData.habits.map(h => h.id));
-      console.log('[Streak Debug] dayData:', JSON.stringify(dayData));
-    }
-
     if (done === total && total > 0) {
       streak++;
     } else {
@@ -483,7 +476,6 @@ function updateStreak() {
     }
   }
 
-  console.log('[Streak Debug] Final streak:', streak);
   document.getElementById('streak-count').textContent = streak;
   const headerStreak = document.getElementById('streak-count-header');
   if (headerStreak) headerStreak.textContent = streak;
