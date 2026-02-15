@@ -130,18 +130,19 @@ body {
 .sidebar {
   position: fixed;
   top: 0;
-  right: -280px;
+  right: 0;
   width: 270px;
   height: 100vh;
   background: var(--bg-card);
   border-left: 1px solid var(--border);
   z-index: 300;
-  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-lg);
 }
-.sidebar.open { right: 0; }
+.sidebar.open { transform: translateX(0); }
 
 .sidebar-header {
   display: flex;
