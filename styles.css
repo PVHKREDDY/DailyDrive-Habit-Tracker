@@ -57,24 +57,36 @@ body {
 /* ============ HEADER ============ */
 .header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 32px;
+  flex-direction: column;
+  padding: 14px 24px;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
   backdrop-filter: blur(20px);
-  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
   gap: 12px;
 }
 
-.header-left {
+.header-actions {
   display: flex;
   align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .logo {
@@ -121,12 +133,6 @@ body {
   font-weight: 500;
 }
 
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
 
 .streak-badge {
   display: flex;
@@ -880,53 +886,210 @@ body {
 
 @media (max-width: 768px) {
   .header {
-    padding: 16px 20px;
+    padding: 10px 14px;
+    gap: 6px;
   }
-  .main {
-    padding: 16px 20px 40px;
+  .header-bottom {
+    gap: 8px;
   }
-  .tabs {
-    padding: 8px 16px;
-    overflow-x: auto;
+  .logo h1 {
+    font-size: 1.15rem;
   }
-  .tab {
-    padding: 8px 16px;
-    font-size: 0.8rem;
+  .subtitle {
+    font-size: 0.72rem;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .analytics-grid {
-    grid-template-columns: 1fr 1fr;
+  .streak-badge {
+    padding: 6px 12px;
+    font-size: 0.75rem;
   }
-  .chart-card.wide {
-    grid-column: span 2;
+  .btn-primary {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+  .user-avatar {
+    width: 28px;
+    height: 28px;
+  }
+  .main {
+    padding: 12px 12px 40px;
+  }
+  .tabs {
+    padding: 6px 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  .today-card {
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .today-header h2 {
+    font-size: 1rem;
+  }
+  .today-progress-ring {
+    width: 56px;
+    height: 56px;
+  }
+  .today-progress-ring svg {
+    width: 56px;
+    height: 56px;
+  }
+  .ring-text {
+    font-size: 0.75rem;
+  }
+  .today-habits {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .habit-check-item {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .habit-check-icon {
+    font-size: 1rem;
+  }
+  .habit-check-label {
+    font-size: 0.85rem;
+  }
+  .habit-checkbox {
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+  }
+  .section-title {
+    font-size: 1rem;
   }
   .calendar-grid {
     gap: 4px;
   }
   .calendar-day {
-    min-height: 48px;
+    min-height: 44px;
+    border-radius: 6px;
   }
   .calendar-day .day-num {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
   .calendar-day .day-status {
-    font-size: 0.55rem;
+    font-size: 0.5rem;
+  }
+  .calendar-day-header {
+    font-size: 0.65rem;
+    padding: 4px 0;
+  }
+  .calendar-legend {
+    gap: 10px;
+    font-size: 0.7rem;
+  }
+  .analytics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .stat-card {
+    padding: 16px;
+  }
+  .stat-icon {
+    font-size: 1.5rem;
+  }
+  .stat-value {
+    font-size: 1.1rem;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+  }
+  .chart-card {
+    padding: 16px;
+  }
+  .chart-card.wide {
+    grid-column: span 2;
+  }
+  .chart-card h3 {
+    font-size: 0.85rem;
+  }
+  .settings-panel {
+    padding: 20px 16px;
+  }
+  .add-habit-form {
+    flex-direction: column;
+  }
+  .add-habit-form input,
+  .add-habit-form select {
+    min-width: 100%;
+  }
+  .modal {
+    max-width: 95vw;
+    margin: 12px;
+  }
+  .modal-header {
+    padding: 14px 16px;
+  }
+  .modal-body {
+    padding: 14px 16px;
+  }
+  #toast-container {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: none;
+  }
+  .toast {
+    padding: 12px 14px;
+  }
+  .toast-title {
+    font-size: 0.8rem;
+  }
+  .toast-message {
+    font-size: 0.75rem;
+  }
+  .footer {
+    font-size: 0.7rem;
+    padding: 16px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 380px) {
+  .header {
+    padding: 10px 12px;
+  }
+  .logo h1 {
+    font-size: 1.1rem;
+  }
+  .header-actions {
+    gap: 6px;
+  }
+  .streak-badge {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+  }
+  .btn-primary {
+    padding: 7px 12px;
+    font-size: 0.75rem;
+  }
+  .main {
+    padding: 10px 8px 32px;
+  }
+  .today-card {
+    padding: 14px;
+  }
+  .today-header h2 {
+    font-size: 0.9rem;
+  }
   .analytics-grid {
     grid-template-columns: 1fr;
   }
   .chart-card.wide {
     grid-column: span 1;
   }
-  .today-habits {
-    grid-template-columns: 1fr;
-  }
-  .header-right {
-    width: 100%;
-    justify-content: space-between;
+  .stat-card {
+    padding: 14px;
   }
 }
 

@@ -55,23 +55,25 @@
 
     <!-- Header -->
     <header class="header">
-      <div class="header-left">
-      <div class="logo">
-        <img src="logo.svg" alt="DailyDrive" class="logo-img" width="28" height="28" />
-        <h1>DailyDrive</h1>
+      <div class="header-top">
+        <div class="logo">
+          <img src="logo.svg" alt="DailyDrive" class="logo-img" width="28" height="28" />
+          <h1>DailyDrive</h1>
+        </div>
+        <div class="header-actions">
+          <div class="streak-badge" id="streak-badge">
+            <span class="streak-icon">🔥</span>
+            <span id="streak-count">0</span> day streak
+          </div>
+          <div class="user-menu" id="user-menu" style="display:none;">
+            <img class="user-avatar" id="user-avatar" src="" alt="" />
+            <button class="btn btn-ghost btn-sm" id="signout-btn">Sign Out</button>
+          </div>
+        </div>
       </div>
+      <div class="header-bottom">
         <span class="subtitle" id="header-subtitle">Monthly Habit Tracker</span>
-      </div>
-      <div class="header-right">
-        <div class="streak-badge" id="streak-badge">
-          <span class="streak-icon">🔥</span>
-          <span id="streak-count">0</span> day streak
-        </div>
-        <button class="btn btn-primary" id="check-today-btn">Check Today's Progress</button>
-        <div class="user-menu" id="user-menu" style="display:none;">
-          <img class="user-avatar" id="user-avatar" src="" alt="" />
-          <button class="btn btn-ghost btn-sm" id="signout-btn">Sign Out</button>
-        </div>
+        <button class="btn btn-primary" id="check-today-btn">Check Progress</button>
       </div>
     </header>
 

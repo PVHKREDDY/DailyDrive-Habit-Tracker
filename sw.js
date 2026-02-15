@@ -3,7 +3,7 @@
    Enables offline support & PWA install
    ============================================ */
 
-const CACHE_NAME = 'dailydrive-v3';
+const CACHE_NAME = 'dailydrive-v4';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
