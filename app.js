@@ -60,12 +60,18 @@ let firestoreUnsubscribe = null;
 // ─── AUTH & INITIALIZATION ─────────────────────────────
 
 // Show/hide screens
+function hideLoading() {
+  document.getElementById('loading-screen').style.display = 'none';
+}
+
 function showAuthScreen() {
+  hideLoading();
   document.getElementById('auth-screen').style.display = 'flex';
   document.getElementById('app-wrapper').style.display = 'none';
 }
 
 function showApp() {
+  hideLoading();
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('app-wrapper').style.display = 'block';
 }
@@ -92,6 +98,7 @@ document.getElementById('google-signin-btn').addEventListener('click', async () 
 document.getElementById('offline-btn').addEventListener('click', () => {
   isOnlineMode = false;
   currentUser = null;
+  localStorage.setItem('dailydrive_mode', 'offline');
   appData = loadLocalData();
   document.getElementById('user-menu').style.display = 'none';
   showApp();
@@ -104,6 +111,7 @@ document.getElementById('signout-btn').addEventListener('click', async () => {
     firestoreUnsubscribe();
     firestoreUnsubscribe = null;
   }
+  localStorage.removeItem('dailydrive_mode');
   if (auth) {
     await auth.signOut();
   }
@@ -118,6 +126,7 @@ if (isFirebaseConfigured()) {
     if (user) {
       currentUser = user;
       isOnlineMode = true;
+      localStorage.setItem('dailydrive_mode', 'online');
 
       // Show user info
       document.getElementById('user-menu').style.display = 'flex';
@@ -133,17 +142,32 @@ if (isFirebaseConfigured()) {
 
       showSyncBanner('Synced with cloud ✓', 'success');
     } else {
-      // Not signed in — show auth screen
-      // But if they were already in offline mode, don't kick them out
-      if (!document.getElementById('app-wrapper').style.display ||
-          document.getElementById('app-wrapper').style.display === 'none') {
+      // Not signed in — check if they were in offline mode
+      const savedMode = localStorage.getItem('dailydrive_mode');
+      if (savedMode === 'offline') {
+        // Restore offline session without showing auth screen
+        isOnlineMode = false;
+        currentUser = null;
+        appData = loadLocalData();
+        document.getElementById('user-menu').style.display = 'none';
+        showApp();
+        initApp();
+      } else {
         showAuthScreen();
       }
     }
   });
 } else {
-  // No Firebase — go straight to offline mode
-  showAuthScreen();
+  // No Firebase — check for saved offline session
+  const savedMode = localStorage.getItem('dailydrive_mode');
+  if (savedMode === 'offline') {
+    isOnlineMode = false;
+    appData = loadLocalData();
+    showApp();
+    initApp();
+  } else {
+    showAuthScreen();
+  }
 }
 
 // ─── DATA MANAGEMENT ───────────────────────────────────

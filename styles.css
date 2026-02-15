@@ -930,6 +930,27 @@ body {
   }
 }
 
+/* ============ LOADING SCREEN ============ */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--bg-primary);
+  gap: 16px;
+}
+
+.loading-logo {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.loading-text {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 /* ============ AUTH SCREEN ============ */
 .auth-screen {
   display: flex;
