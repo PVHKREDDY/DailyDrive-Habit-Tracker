@@ -777,6 +777,11 @@ body {
   overflow: hidden;
 }
 
+.chart-wrapper-doughnut {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
 .chart-wrapper canvas {
   max-width: 100%;
   display: block;
