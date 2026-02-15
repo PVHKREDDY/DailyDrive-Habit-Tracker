@@ -269,16 +269,6 @@ function listenForCloudChanges() {
     });
 }
 
-function showSyncBanner(text, type) {
-  const banner = document.getElementById('sync-banner');
-  const statusText = document.getElementById('sync-status-text');
-  statusText.textContent = text;
-  banner.style.display = 'block';
-  banner.className = `sync-banner sync-${type || 'info'}`;
-  setTimeout(() => {
-    banner.style.display = 'none';
-  }, 3000);
-}
 
 function dayKey(day) {
   return `${YEAR}-${String(MONTH + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
