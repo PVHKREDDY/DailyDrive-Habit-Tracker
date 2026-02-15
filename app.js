@@ -60,18 +60,12 @@ let firestoreUnsubscribe = null;
 // ─── AUTH & INITIALIZATION ─────────────────────────────
 
 // Show/hide screens
-function hideLoading() {
-  document.getElementById('loading-screen').style.display = 'none';
-}
-
 function showAuthScreen() {
-  hideLoading();
   document.getElementById('auth-screen').style.display = 'flex';
   document.getElementById('app-wrapper').style.display = 'none';
 }
 
 function showApp() {
-  hideLoading();
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('app-wrapper').style.display = 'block';
 }
