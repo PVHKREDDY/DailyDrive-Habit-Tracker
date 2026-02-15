@@ -965,15 +965,7 @@ function checkAndRoast() {
   const incomplete = appData.habits.filter(h => !dayData[h.id]);
 
   if (incomplete.length > 0) {
-    // Show angry roast toast
-    showToast('warning', '😤 Amma is ANGRY!', getRandomAngryMessage(), 12000);
-
-    // List missing habits
-    setTimeout(() => {
-      const missingList = incomplete.map(h => `${h.icon} ${h.name}`).join(', ');
-      showToast('warning', `${incomplete.length} habit(s) NOT DONE!`,
-        `Missing: ${missingList}. Fix this before you sleep!`, 12000);
-    }, 1000);
+    showToast('warning', `😤 ${incomplete.length} habit(s) NOT DONE!`, getRandomAngryMessage(), 12000);
   }
 }
 
