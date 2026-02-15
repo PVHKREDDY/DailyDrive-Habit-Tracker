@@ -415,14 +415,13 @@ async function toggleHabit(dayKeyStr, habitId) {
     appData.days[dayKeyStr] = {};
   }
   appData.days[dayKeyStr][habitId] = !appData.days[dayKeyStr][habitId];
-  await saveData();
+  saveData();
   renderToday();
   renderCalendar();
 
-  // Check if all habits are now done for today
-  const todayKey = dayKey(getTodayDay());
-  if (dayKeyStr === todayKey) {
-    const dayData = appData.days[todayKey] || {};
+  // If this is today's key AND the habit was just checked (not unchecked), see if all done
+  if (appData.days[dayKeyStr][habitId]) {
+    const dayData = appData.days[dayKeyStr];
     const total = appData.habits.length;
     const done = appData.habits.filter(h => dayData[h.id]).length;
     if (done === total && total > 0) {
