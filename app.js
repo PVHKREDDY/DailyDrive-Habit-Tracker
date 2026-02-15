@@ -3,6 +3,13 @@
    Core application logic with Firebase sync
    ============================================ */
 
+// ─── FORCE SERVICE WORKER UPDATE ──────────────────────
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.getRegistration().then(reg => {
+    if (reg) reg.update();
+  });
+}
+
 // ─── CONFIGURATION (auto-detects current month & year) ──
 const NOW = new Date();
 const MONTH = NOW.getMonth(); // 0-indexed (0=Jan, 1=Feb, ...)
