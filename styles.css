@@ -1044,10 +1044,12 @@ body {
 
 @media (max-width: 768px) {
   /* Show hamburger + mobile streak, hide desktop actions */
-  .hamburger { display: flex; margin-left: 0; }
-  .mobile-streak { display: flex; margin-left: auto; }
+  .hamburger { display: flex; }
+  .mobile-streak { display: flex; }
   .desktop-actions { display: none !important; }
   .subtitle { display: none; }
+  .header { justify-content: flex-end; }
+  .header .logo { margin-right: auto; }
 
   .header {
     padding: 10px 14px;
