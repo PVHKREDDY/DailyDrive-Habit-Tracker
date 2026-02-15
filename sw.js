@@ -3,15 +3,15 @@
    Enables offline support & PWA install
    ============================================ */
 
-const CACHE_NAME = 'dailydrive-v30';
+const CACHE_NAME = 'dailydrive-v31';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/app.js',
-  '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
+  './',
+  './index.html',
+  './styles.css',
+  './app.js',
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
 ];
 
 // External resources to cache (CDN)

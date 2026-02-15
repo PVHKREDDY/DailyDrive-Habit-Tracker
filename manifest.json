@@ -1,13 +1,13 @@
 {
   "name": "DailyDrive — Habit Tracker",
   "short_name": "DailyDrive",
-  "description": "February Habit Tracker — 28 Days to a Better You. Track daily habits, get motivated, and visualize your progress.",
-  "start_url": "/index.html",
+  "description": "Track daily habits, get motivated, and visualize your progress. Build streaks and become your best self.",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#0a0a0f",
   "theme_color": "#7c5cff",
   "orientation": "any",
-  "scope": "/",
+  "scope": ".",
   "icons": [
     {
       "src": "icons/icon-72.png",
