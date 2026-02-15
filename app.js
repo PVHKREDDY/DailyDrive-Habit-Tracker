@@ -56,6 +56,7 @@ let appData = null;
 let currentUser = null;
 let isOnlineMode = false;
 let firestoreUnsubscribe = null;
+let lastLocalSaveTime = 0;
 
 // ─── AUTH & INITIALIZATION ─────────────────────────────
 
@@ -202,6 +203,7 @@ async function saveData(data) {
   // If signed in, also push to Firestore
   if (isOnlineMode && currentUser && db) {
     try {
+      lastLocalSaveTime = Date.now();
       await db.collection('users').doc(currentUser.uid).set({
         habits: data.habits,
         days: data.days,
@@ -248,6 +250,9 @@ function listenForCloudChanges() {
   firestoreUnsubscribe = db.collection('users').doc(currentUser.uid)
     .onSnapshot((doc) => {
       if (doc.exists && doc.metadata.hasPendingWrites === false) {
+        // Ignore snapshots triggered by our own saves (within last 3 seconds)
+        if (Date.now() - lastLocalSaveTime < 3000) return;
+
         // Data changed from another device
         const cloudData = doc.data();
         appData = {
@@ -255,7 +260,6 @@ function listenForCloudChanges() {
           days: cloudData.days || appData.days,
         };
         saveLocal(appData);
-        // Re-render everything
         renderToday();
         renderCalendar();
         showSyncBanner('Synced from another device ✓', 'success');
